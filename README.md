@@ -63,3 +63,10 @@ Was it hosted on github or Rpubs?
 Was the server calculation displayed in the html page?
 Here's your opportunity to give this presentation a +1 for being well done. Did they tinker around with the default style? Was the presentation particularly lucid and well organized? In other words, the student made a legitimate try.
 There were no R errors displayed in the presentation.
+
+Here is is link to the published shiny app:
+https://enastudies.shinyapps.io/shinyapp/
+
+Here is a link to the published shiny app doccumentation
+https://enastudies.shinyapps.io/MyShinyAppDocumentation/
+
