@@ -1,0 +1,59 @@
+---
+title: "My Shiny App Documentation"
+author: "ENA"
+date: "December 22, 2017"
+runtime: shiny
+output: html_document
+---
+
+The purpose of this application is to explore the realtion between miles per gallon and transmission type, number of cylinders, and gears.
+
+For this purpose we created a shiny application that has one independent variable, observed characteristic, and one dependent variable, MPG.  The standard mtcars dataset propived with R is used for this application.
+
+Our goal is to answer the follwoing questions
+
+1. Does MPG increase or decrease as the number of cylinders grow
+2. Does MPG increase or decrease as the number of gears increase
+3. Do the automatic or manual cars have higher MPG
+
+Our shiny application has a side bar panel and and a main panel. In the side bar panel there is one drop down list box with 3 choices - cylinders, gears, transmission. Based on the choice of that input, there is a MPG graphic displayed in the main panel.
+
+Here is how the input looks like.  You can change the observed characteristic and find out how the output looks like.
+
+```{r echo = FALSE}
+library(shiny)
+library(datasets)
+
+selectInput("variable", "Observed Characteristic:",
+                    list("Cylinders" = "cyl", 
+                         "Gears" = "gear",
+                         "Transmission" = "am"))
+```
+
+
+Here is the output. You can easily answer the questions above by changing the input and observe the output.
+
+```{r echo = FALSE}
+renderPlot({
+    mpgData <- mtcars
+    mpgData$am <- factor(mpgData$am, labels = c("Automatic", "Manual"))
+        
+    # Compute the forumla text in a reactive expression
+    formulaText <- reactive({
+        paste("mpg ~", input$variable)
+    })
+    
+    # Return the formula text for printing as a title
+    output$title <- renderText({
+        formulaText()
+    })
+    
+        plot(formula = as.formula(formulaText()), 
+             data = mpgData,
+             xlab = input$variable,
+             ylab = "mpg",
+             type="o",
+             col = "dark green")
+    })
+
+```
